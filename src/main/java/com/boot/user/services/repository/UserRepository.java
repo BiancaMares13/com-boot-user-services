@@ -12,9 +12,9 @@ import com.boot.user.services.model.User;
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
 
-	public Id getUserById(Id id);
+	public User getUserById(Id id);
 
-	public String getUserByUsername(String userName);
+	public User getUserByUsername(String userName);
 
 	public List<User> getAllUsers();
 
