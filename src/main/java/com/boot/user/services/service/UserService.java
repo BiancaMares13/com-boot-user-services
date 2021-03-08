@@ -2,8 +2,6 @@ package com.boot.user.services.service;
 
 import java.util.List;
 
-import javax.persistence.Id;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +18,7 @@ public class UserService {
 		return userRepository.save(user);
 	}
 
-	public User getUserById(Id id) {
+	public User getUserById(long id) {
 		return userRepository.getUserById(id);
 	}
 
