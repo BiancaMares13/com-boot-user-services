@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -16,6 +17,7 @@ import com.boot.user.services.model.User;
 import com.boot.user.services.service.UserService;
 
 @Controller
+@RequestMapping("/users")
 public class UserController {
 
 	@Autowired
@@ -41,10 +43,10 @@ public class UserController {
 		return new ResponseEntity<>(userList, HttpStatus.OK);
 	}
 
-	@GetMapping("/getUserById")
+	@GetMapping("/getUserByUsername")
 	@ResponseBody
 	public ResponseEntity<User> getUserByUsername(@RequestParam String userName) {
-		User user = userService.getUserByUsername(userName);
+		User user = userService.getUserByUserName(userName);
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 }

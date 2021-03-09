@@ -23,11 +23,12 @@ public class UserService {
 	}
 
 	public List<User> getAllUsers() {
-		return userRepository.getAllUsers();
+	
+		return userRepository.findAll();
 	}
 
-	public User getUserByUsername(String userName) {
-		return userRepository.getUserByUsername(userName);
+	public User getUserByUserName(String userName) {
+		return userRepository.getUserByUserName(userName);
 	}
 
 }
