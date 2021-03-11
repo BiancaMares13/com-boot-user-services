@@ -1,7 +1,7 @@
 package com.boot.user.services.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @Data
+@Accessors(chain = true)
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
@@ -37,7 +39,7 @@ public class User implements Serializable {
 	private String userName;
 
 	@Column(name = "birth_date")
-	private Date birthDate;
+	private LocalDate birthDate;
 
 	@Column(name = "password")
 	private String password;
@@ -52,8 +54,8 @@ public class User implements Serializable {
 	private String deliveryAddress;
 
 	@Column(name = "created_on")
-	private Date createdOn;
+	private LocalDate createdOn;
 
 	@Column(name = "last_updated_on")
-	private Date lastUpdatedOn;
+	private LocalDate lastUpdatedOn;
 }

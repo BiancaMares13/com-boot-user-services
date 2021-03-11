@@ -1,21 +1,27 @@
 package com.boot.user.services.dto;
 
-import java.util.Date;
-import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+
+
+
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 @Data
+@Accessors(chain = true)
+@NoArgsConstructor
 public class UserDTO {
 
-	@NotNull
+	
 	private String firstName;
 
 	private String lastName;
 
 	private String userName;
 
-	private Date birthDate;
+	private LocalDate birthDate;
 
 	private String password;
 
@@ -27,4 +33,6 @@ public class UserDTO {
 
 	// userOrder : boolean--- user can order if he is over 18 years
 	private boolean userOrder;
+
+
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.boot.user.services.model.User;
 import com.boot.user.services.service.UserService;
 
+
 @Controller
 @RequestMapping("/users")
 public class UserController {
