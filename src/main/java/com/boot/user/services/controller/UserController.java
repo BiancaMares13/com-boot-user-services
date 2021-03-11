@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.boot.user.services.exception.InvalidInputDataException;
 import com.boot.user.services.model.User;
 import com.boot.user.services.service.UserService;
 
@@ -25,7 +26,7 @@ public class UserController {
 	private UserService userService;
 
 	@PostMapping("/addUser")
-	public ResponseEntity<User> addUser(@RequestBody User user) {
+	public ResponseEntity<User> addUser(@RequestBody User user) throws InvalidInputDataException {
 		User newUser = userService.addUser(user);
 		return new ResponseEntity<>(newUser, HttpStatus.CREATED);
 	}
