@@ -26,7 +26,7 @@ public class UserMapper {
 	private static boolean checkUserAge(LocalDate birthday) {
 		LocalDate currentDate = LocalDate.now();
 		Period p = Period.between(currentDate, birthday);
-		System.out.println("User has 18 years:" + (p.getYears() >= 18 ? true : false));
+		System.out.println("User has 18 years: " + (p.getYears() >= 18 ? true : false));
 		return p.getYears() >= 18 ? true : false;
 	}
 
