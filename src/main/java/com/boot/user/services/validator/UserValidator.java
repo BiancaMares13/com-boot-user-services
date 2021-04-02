@@ -32,13 +32,18 @@ public class UserValidator {
 		return pat.matcher(username).matches();
 	}
 
-	public boolean isUsernameUnique(String username) {
+	public boolean isUsernamePresent(String username) {
 		if (userRepository.getUserByUserName(username) == null) return true;
 		return false;
 	}
+	
+	public boolean isIdPresent(long id) {
+		if (userRepository.getUserById(id) == null) return false;
+		return true;
+	}
 
 	public boolean isUserDataSizeCorrect(String userData, int min, int max) {
-	if(userData.length()< min ||userData.length()> max)	
+	if(userData == null||userData.length()< min ||userData.length()> max)	
 		return false;
 	return true;
 	}

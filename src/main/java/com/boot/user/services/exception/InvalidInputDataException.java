@@ -1,7 +1,12 @@
 package com.boot.user.services.exception;
 
 public class InvalidInputDataException extends Exception {
-    public InvalidInputDataException(String message){
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4624485104006561870L;
+
+	public InvalidInputDataException(String message){
         super(message);
     }
 }

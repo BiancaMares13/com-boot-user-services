@@ -3,7 +3,6 @@ package com.boot.user.services.mapper;
 import java.time.LocalDate;
 import java.time.Period;
 
-import javax.persistence.Column;
 
 import com.boot.user.services.dto.UserDTO;
 import com.boot.user.services.model.User;

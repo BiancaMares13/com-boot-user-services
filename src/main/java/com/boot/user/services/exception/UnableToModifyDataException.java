@@ -1,7 +1,12 @@
 package com.boot.user.services.exception;
 
 public class UnableToModifyDataException  extends Exception {
-    public UnableToModifyDataException(String message){
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8367698541607582380L;
+
+	public UnableToModifyDataException(String message){
         super(message);
     }
 }

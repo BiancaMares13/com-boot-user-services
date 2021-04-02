@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpServerErrorException;
 
+import com.boot.user.services.exception.EntityNotFoundException;
 import com.boot.user.services.exception.InvalidInputDataException;
 import com.boot.user.services.model.User;
 import com.boot.user.services.repository.UserRepository;
@@ -34,7 +36,7 @@ public class UserService {
 		if (!userValidator.isUsernameValid(user.getUserName())) {
 			throw new InvalidInputDataException("invalid username format!");
 		}
-		if (!userValidator.isUsernameUnique(user.getUserName())) {
+		if (!userValidator.isUsernamePresent(user.getUserName())) {
 			throw new InvalidInputDataException("usename is already used!");
 		}
 		if (!userValidator.isUserDataSizeCorrect(user.getUserName(), 3, 30)) {
@@ -56,23 +58,39 @@ public class UserService {
 		if (!userValidator.isUserDataSizeCorrect(user.getPhoneNumber(), 10, 15)) {
 			throw new InvalidInputDataException("Phone number has to be between 10 and 15 characters long!");
 		}
-	
-		user.setPassword( passwordEncoder.encode(user.getPassword()));
+
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 
 		return userRepository.save(user);
 	}
 
-	public User getUserById(long id) {
+	public User getUserById(long id) throws EntityNotFoundException {
+		if (!userValidator.isIdPresent(id)) {
+			throw new EntityNotFoundException("Id: " + id + " not found in the Database!");
+		}
 		return userRepository.getUserById(id);
 	}
 
-	public List<User> getAllUsers() {
-
+	public List<User> getAllUsers() throws EntityNotFoundException {
+		if (userRepository.findAll() == null || userRepository.findAll().isEmpty()) {
+			throw new EntityNotFoundException("No user found in the Database!");
+		}
 		return userRepository.findAll();
 	}
 
-	public User getUserByUserName(String userName) {
+	public User getUserByUserName(String userName) throws EntityNotFoundException {
+
+		if (userValidator.isUsernamePresent(userName)) {
+			throw new EntityNotFoundException("UserName: " + userName + " not found in the Database!");
+		}
 		return userRepository.getUserByUserName(userName);
+	}
+
+	public void deleteUserById(long id) throws EntityNotFoundException {
+		if (!userValidator.isIdPresent(id)) {
+			throw new EntityNotFoundException("Id: " + id + " not found in the Database!");
+		}
+		userRepository.deleteById(id);
 	}
 
 }
