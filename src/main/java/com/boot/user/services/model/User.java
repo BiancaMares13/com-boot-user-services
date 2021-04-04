@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -28,34 +29,34 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-
-	@Column(name = "first_name")
+	@Column
 	private String firstName;
 
-	@Column(name = "last_name")
+	@Column
 	private String lastName;
 
-	@Column(name = "user_name")
+	@Column(unique = true)
+	@Size(min = 3, max = 15)
 	private String userName;
 
-	@Column(name = "birth_date")
+	@Column
 	private LocalDate birthDate;
 
-	@Column(name = "password")
+	@Column
 	private String password;
 
-	@Column(name = "phone_number")
+	@Column
 	private String phoneNumber;
 
-	@Column(name = "email")
+	@Column(unique = true)
 	private String email;
 
-	@Column(name = "delivery_address")
+	@Column
 	private String deliveryAddress;
 
-	@Column(name = "created_on")
+	@Column
 	private LocalDate createdOn;
 
-	@Column(name = "last_updated_on")
+	@Column
 	private LocalDate lastUpdatedOn;
 }
