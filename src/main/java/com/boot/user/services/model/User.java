@@ -35,7 +35,6 @@ public class User implements Serializable {
 	@Column
 	private String lastName;
 
-	@Column(unique = true)
 	@Size(min = 3, max = 15)
 	private String userName;
 
@@ -48,7 +47,7 @@ public class User implements Serializable {
 	@Column
 	private String phoneNumber;
 
-	@Column(unique = true)
+	@Column
 	private String email;
 
 	@Column

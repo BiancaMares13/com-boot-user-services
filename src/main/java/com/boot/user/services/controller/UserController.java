@@ -8,13 +8,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.boot.user.services.dto.UserDTO;
 import com.boot.user.services.exception.EntityNotFoundException;
 import com.boot.user.services.exception.InvalidInputDataException;
 import com.boot.user.services.model.User;
@@ -28,9 +31,16 @@ public class UserController {
 	private UserService userService;
 
 	@PostMapping("/addUser")
-	public ResponseEntity<User> addUser(@RequestBody User user) throws InvalidInputDataException {
-		User newUser = userService.addUser(user);
+	public ResponseEntity<UserDTO> addUser(@RequestBody UserDTO user) throws InvalidInputDataException {
+		UserDTO newUser = userService.addUser(user);
 		return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+	}
+
+	@PutMapping("/updateUserByUserName/{userName}")
+	public ResponseEntity<UserDTO> updateUserByUsername(@RequestBody UserDTO userDTO,
+			@PathVariable("userName") String userName) throws EntityNotFoundException, InvalidInputDataException {
+		UserDTO user = userService.updateUserByUserName(userName, userDTO);
+		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 
 	@GetMapping("/getUserById")

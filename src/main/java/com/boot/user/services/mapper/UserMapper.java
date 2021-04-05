@@ -24,7 +24,7 @@ public class UserMapper {
 
 	private static boolean checkUserAge(LocalDate birthday) {
 		LocalDate currentDate = LocalDate.now();
-		Period p = Period.between(currentDate, birthday);
+		Period p = Period.between(birthday,currentDate );
 		System.out.println("User has 18 years: " + (p.getYears() >= 18 ? true : false));
 		return p.getYears() >= 18 ? true : false;
 	}
@@ -39,7 +39,20 @@ public class UserMapper {
 				.setPassword(userDto.getPassword())
 				.setPhoneNumber(userDto.getPhoneNumber())
 				.setDeliveryAddress(userDto.getDeliveryAddress())
-				.setEmail(userDto.getEmail());
+				.setEmail(userDto.getEmail());	        	
+	}
+	
+	
+	public static User updateDtoToUserEntity(User user, UserDTO userDto) {
+		return user
+				.setFirstName(userDto.getFirstName())
+				.setLastName(userDto.getLastName())
+				.setUserName(userDto.getUserName())
+				.setBirthDate(userDto.getBirthDate())
+				.setPassword(userDto.getPassword())
+				.setPhoneNumber(userDto.getPhoneNumber())
+				.setDeliveryAddress(userDto.getDeliveryAddress())
+				.setEmail(userDto.getEmail());	        	
 	}
 
 }
