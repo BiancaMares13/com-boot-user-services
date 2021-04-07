@@ -18,7 +18,6 @@ import com.boot.user.services.model.User;
 import com.boot.user.services.repository.UserRepository;
 import com.boot.user.services.validator.UserValidator;
 
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Service
@@ -43,16 +42,38 @@ public class UserService {
 
 		List<Product> favoriteProductList = new ArrayList<Product>();
 		favoriteProductList = userDTOMapped.getFavoriteProductList();
-	
-		if(favoriteProductList.stream().anyMatch(p -> productName.equals(p.getProductName()))) {
-			throw new DuplicateEntryException("Product: "+ productName +" was already added to favorites!");
-		}
-		else {
-		favoriteProductList.add(product);					
-		userDTOMapped.setFavoriteProductList(favoriteProductList);
-		user = userRepository.save(UserMapper.updateDtoToUserEntity(user, userDTOMapped));
 
-		return UserMapper.UserEntityToDto(user);
+		if (favoriteProductList.stream().anyMatch(p -> productName.equals(p.getProductName()))) {
+			throw new DuplicateEntryException("Product: " + productName + " was already added to favorites!");
+		} else {
+			favoriteProductList.add(product);
+			userDTOMapped.setFavoriteProductList(favoriteProductList);
+			user = userRepository.save(UserMapper.updateDtoToUserEntity(user, userDTOMapped));
+
+			return UserMapper.UserEntityToDto(user);
+		}
+	}
+
+	public UserDTO removeProductFromUserFavorites(String userName, String productName) throws EntityNotFoundException {
+
+		Product product = ProductServiceClient.callGetProductByProductName(productName).getBody();
+
+		User user = userRepository.getUserByUserName(userName);
+
+		UserDTO userDTOMapped = UserMapper.UserEntityToDto(user);
+
+		List<Product> favoriteProductList = new ArrayList<Product>();
+		favoriteProductList = userDTOMapped.getFavoriteProductList();
+
+		if (favoriteProductList.stream().anyMatch(p -> productName.equals(p.getProductName()))) {
+			
+			favoriteProductList.remove(product);
+			userDTOMapped.setFavoriteProductList(favoriteProductList);
+			user = userRepository.save(UserMapper.updateDtoToUserEntity(user, userDTOMapped));
+
+			return UserMapper.UserEntityToDto(user);
+		} else {
+			throw new EntityNotFoundException("Product: " + productName + " was not found in the favorites list!");
 		}
 	}
 
