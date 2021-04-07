@@ -1,9 +1,9 @@
 package com.boot.user.services.dto;
 
 import java.time.LocalDate;
+import java.util.List;
 
-
-
+import com.boot.user.services.model.Product;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,6 +33,7 @@ public class UserDTO {
 
 	// userOrder : boolean--- user can order if he is over 18 years
 	private boolean userOrder;
-
+	
+	private List<Product> favoriteProductList;
 
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boot.user.services.dto.UserDTO;
+import com.boot.user.services.exception.DuplicateEntryException;
 import com.boot.user.services.exception.EntityNotFoundException;
 import com.boot.user.services.exception.InvalidInputDataException;
 import com.boot.user.services.model.User;
@@ -34,6 +35,13 @@ public class UserController {
 	public ResponseEntity<UserDTO> addUser(@RequestBody UserDTO user) throws InvalidInputDataException {
 		UserDTO newUser = userService.addUser(user);
 		return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+	}
+
+	@PutMapping("/addProductToUserFavorites/{userName}/{productName}")
+	public ResponseEntity<UserDTO> addProductToUserFavorites(@PathVariable("userName") String userName,@PathVariable("productName") String productName)
+			throws EntityNotFoundException, InvalidInputDataException, DuplicateEntryException {
+		UserDTO user = userService.addProductToUserFavorites(userName, productName);
+		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 
 	@PutMapping("/updateUserByUserName/{userName}")

@@ -19,7 +19,8 @@ public class UserMapper {
 				.setPhoneNumber(user.getPhoneNumber())
 				.setEmail(user.getEmail())
 				.setDeliveryAddress(user.getDeliveryAddress())
-				.setUserOrder(checkUserAge(user.getBirthDate()));
+				.setUserOrder(checkUserAge(user.getBirthDate()))
+				.setFavoriteProductList(user.getFavoriteProductList());
 	}
 
 	private static boolean checkUserAge(LocalDate birthday) {
@@ -39,7 +40,8 @@ public class UserMapper {
 				.setPassword(userDto.getPassword())
 				.setPhoneNumber(userDto.getPhoneNumber())
 				.setDeliveryAddress(userDto.getDeliveryAddress())
-				.setEmail(userDto.getEmail());	        	
+				.setEmail(userDto.getEmail())
+				.setFavoriteProductList(userDto.getFavoriteProductList());
 	}
 	
 	
@@ -52,7 +54,8 @@ public class UserMapper {
 				.setPassword(userDto.getPassword())
 				.setPhoneNumber(userDto.getPhoneNumber())
 				.setDeliveryAddress(userDto.getDeliveryAddress())
-				.setEmail(userDto.getEmail());	        	
+				.setEmail(userDto.getEmail())
+				.setFavoriteProductList(userDto.getFavoriteProductList());
 	}
 
 }
